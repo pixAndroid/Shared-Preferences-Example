@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnAdd, btnSub;
@@ -42,5 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 txtTotal.setText("Your total is: " + counter);
             }
         });
+    }
+
+    public void resetPreferences(View view) {
+        PrefConfig.removeDataFromPref(this);
     }
 }

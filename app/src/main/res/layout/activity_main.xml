@@ -17,6 +17,7 @@
         android:layout_marginBottom="20dp"/>
 
     <LinearLayout
+        android:id="@+id/linear_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -38,5 +39,19 @@
             android:textSize="16sp"
             android:layout_margin="10dp"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_reset_pref"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset Preferences"
+        android:layout_below="@+id/linear_buttons"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:onClick="resetPreferences"/>
+
+
 
 </RelativeLayout>

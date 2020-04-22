@@ -25,4 +25,11 @@ public class PrefConfig {
         return pref.getInt(PREF_TOTAL_KEY, 0);
     }
 
+    public static void removeDataFromPref(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.remove(PREF_TOTAL_KEY);
+        editor.apply();
+    }
+
 }

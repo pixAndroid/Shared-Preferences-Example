@@ -2,13 +2,13 @@ package com.dailycoding.examplesharedpreference;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private Button btnAdd, btnSub;
     private TextView txtTotal;
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 counter++;
                 PrefConfig.saveTotalInPref(getApplicationContext(), counter);
-                txtTotal.setText("Your total is: " + counter);
+                //txtTotal.setText("Your total is: " + counter);
             }
         });
 
@@ -40,12 +40,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 counter--;
                 PrefConfig.saveTotalInPref(getApplicationContext(), counter);
-                txtTotal.setText("Your total is: " + counter);
+                //txtTotal.setText("Your total is: " + counter);
             }
         });
     }
 
     public void resetPreferences(View view) {
         PrefConfig.removeDataFromPref(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(PrefConfig.PREF_TOTAL_KEY)) {
+            counter = PrefConfig.loadTotalFromPref(this);
+            txtTotal.setText("Your total is: " + counter);
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PrefConfig.registerPref(this, this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PrefConfig.unregisterPref(this, this);
     }
 }

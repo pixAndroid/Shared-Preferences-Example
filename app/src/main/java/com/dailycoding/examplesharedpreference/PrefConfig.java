@@ -1,6 +1,5 @@
 package com.dailycoding.examplesharedpreference;
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -11,7 +10,7 @@ import android.content.SharedPreferences;
 public class PrefConfig {
 
     private static final String MY_PREFERENCE_NAME = "com.dailycoding.examplesharedpreference";
-    private static final String PREF_TOTAL_KEY = "pref_total_key";
+    public static final String PREF_TOTAL_KEY = "pref_total_key";
 
     public static void saveTotalInPref(Context context, int total) {
         SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCE_NAME, Context.MODE_PRIVATE);
@@ -30,6 +29,16 @@ public class PrefConfig {
         SharedPreferences.Editor editor = pref.edit();
         editor.remove(PREF_TOTAL_KEY);
         editor.apply();
+    }
+
+    public static void registerPref(Context context, SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        pref.registerOnSharedPreferenceChangeListener(listener);
+    }
+
+    public static void unregisterPref(Context context, SharedPreferences.OnSharedPreferenceChangeListener listener) {
+        SharedPreferences pref = context.getSharedPreferences(MY_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        pref.unregisterOnSharedPreferenceChangeListener(listener);
     }
 
 }
